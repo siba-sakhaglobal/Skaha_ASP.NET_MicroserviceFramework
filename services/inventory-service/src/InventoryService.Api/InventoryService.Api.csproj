@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.14" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.*" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.*" />
+    <PackageReference Include="Asp.Versioning.Http" Version="8.*" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.*" />
+    <!-- Rate Limiting (built-in .NET 9) - no extra package needed -->
+    <!-- Polly Resilience for HTTP clients -->
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.*" />
+    <!-- Redis Distributed Cache -->
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.*" />
+    <!-- EF Core Design tools (for migrations) -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InventoryService.Application\InventoryService.Application.csproj" />
+    <ProjectReference Include="..\InventoryService.Infrastructure\InventoryService.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <!-- TODO: Replace with <PackageReference Include="HorizonERP.Shared.Security" /> when Azure Artifacts is ready -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\shared\HorizonERP.Shared.Security\HorizonERP.Shared.Security.csproj" />
+  </ItemGroup>
+
+</Project>

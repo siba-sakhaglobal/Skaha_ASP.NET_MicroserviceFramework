@@ -1,0 +1,31 @@
+services:
+  inventory-db:
+    image: postgres:16-alpine
+    container_name: horizon-inventory-db
+    environment:
+      POSTGRES_DB: inventory_db
+      POSTGRES_USER: erp_dev
+      POSTGRES_PASSWORD: dev_password
+    ports:
+      - "5434:5432"
+    volumes:
+      - inventory_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U erp_dev -d inventory_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: horizon-redis
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  inventory_db_data:
