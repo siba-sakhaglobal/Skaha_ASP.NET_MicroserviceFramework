@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: erp_dev
       POSTGRES_PASSWORD: dev_password
     ports:
-      - "5434:5432"
+      - "5435:5432"
     volumes:
       - inventory_db_data:/var/lib/postgresql/data
     healthcheck:
