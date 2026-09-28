@@ -118,13 +118,24 @@ services/   One folder per microservice, each independently buildable/deployable
 templates/  `dotnet new` template for scaffolding a new service
 packages/   Local NuGet feed (git-ignored) used by scripts/bootstrap.sh until Azure Artifacts is wired up
 infra/      Cross-cutting infrastructure (gateway routes, etc.)
-docs/       Architecture docs and API specs
+docs/       Architecture docs, API specs, and the Claude Code workflow guide
+.claude/    Subagents, skills, and rules for working on this repo with Claude Code
 ```
 
 ## Contributing
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md). The architectural rules there are enforced in review —
 please read them before opening a PR that adds a service or touches `shared/`.
+
+## Developing with Claude Code
+
+This repo ships a curated `.claude/` setup — [`CLAUDE.md`](CLAUDE.md) is the entry point, with
+four subagents pinned to models matched to task complexity (Opus for planning/architecture,
+Sonnet for implementation and review, Haiku for mechanical changes), a curated skill set for
+TDD/debugging/architecture-decision-records/etc., and
+[`docs/development/claude-code-workflow.md`](docs/development/claude-code-workflow.md) for
+token-efficiency and cross-session memory practices. Clone it and Claude already knows the
+framework's rules — you don't have to re-explain the package-boundary rule every session.
 
 ## License
 

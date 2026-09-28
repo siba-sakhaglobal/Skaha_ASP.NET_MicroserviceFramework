@@ -52,6 +52,16 @@ dotnet run --project services/inventory-service/src/InventoryService.Api
   `dotnet new sakhaerp-service -n YourService -o services/your-service`. See
   [`templates/sakhaerp-service/README.md`](templates/sakhaerp-service/README.md).
 
+## Using Claude Code on this repo
+
+[`CLAUDE.md`](CLAUDE.md) is the entry point — it points to the architecture rules, the four
+subagents in [`.claude/agents/`](.claude/agents/) (routed by task complexity, not always the
+biggest model), the curated skills in [`.claude/skills/`](.claude/skills/), and
+[`docs/development/claude-code-workflow.md`](docs/development/claude-code-workflow.md) for
+token-efficiency and cross-session memory practices. If you're extending that setup — adding a
+skill, an agent, or a doc — keep `CLAUDE.md`/`AGENTS.md` themselves short; put detail in a linked
+file instead, since those two load into every session unconditionally.
+
 ## Reporting issues
 
 Security issues: please do not open a public issue — see [`SECURITY.md`](SECURITY.md) (or the

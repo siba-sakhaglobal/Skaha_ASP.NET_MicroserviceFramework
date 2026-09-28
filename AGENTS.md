@@ -1,3 +1,68 @@
+# SakhaERP — Claude Code Guide
+
+SakhaERP is a .NET 9 framework for multi-tenant, event-driven microservices: Clean Architecture
+per service, CQRS via MediatR, versioned shared libraries instead of shared source,
+schema-per-tenant multi-tenancy. `services/inventory-service` is the reference implementation —
+read it to see the conventions applied, not as a spec for an inventory system.
+
+## Read first
+
+1. [`docs/architecture/framework-rules.md`](docs/architecture/framework-rules.md) — the
+   non-negotiable rules. The one that matters most: **never `<ProjectReference>` across a service
+   or shared-library boundary, `PackageReference` only.** This was violated by mistake once
+   already in this codebase and had to be fixed — don't repeat it.
+2. [`docs/architecture/README.md`](docs/architecture/README.md) — index of the rest (tech stack,
+   multi-tenancy, security, resilience, DTO conventions). Read the one doc relevant to your task,
+   not all of them.
+3. [`CONTRIBUTING.md`](CONTRIBUTING.md) — dev setup and PR process.
+
+## Route work by complexity, not by default to the biggest model
+
+| Task | Agent | Model |
+|---|---|---|
+| Planning a new service, a shared-library change, or anything crossing service boundaries | `sakhaerp-planner` | Opus |
+| Implementing a decided change — handlers, EF Core, validators, endpoints | `sakhaerp-developer` | Sonnet |
+| Reviewing a diff/PR against the architecture rules and test coverage | `sakhaerp-qa-reviewer` | Sonnet |
+| Small mechanical changes — renames, boilerplate, typos, config values | `sakhaerp-quick-task` | Haiku |
+
+Definitions in [`.claude/agents/`](.claude/agents/). Full guidance — including token-efficiency
+and memory practices for a fast start in a new session — in
+[`docs/development/claude-code-workflow.md`](docs/development/claude-code-workflow.md).
+
+## Testing is not optional
+
+TDD: failing test first, then the minimum code to pass it (`test-driven-development` skill).
+`dotnet test SakhaERP.sln` passing and `dotnet build SakhaERP.sln` at 0 warnings are the bar
+before calling anything done — see `verification-before-completion` skill, don't claim a fix
+works without having run it.
+
+## Skills available
+
+`.claude/skills/` — invoke the one that matches the task instead of ad hoc exploration:
+`test-driven-development`, `systematic-debugging`, `verification-before-completion`,
+`architecture-decision-record`, `using-git-worktrees`, `writing-plans`, `executing-plans`,
+`find-bugs`, `finishing-a-development-branch`, `web-design-guidelines`, `react-best-practices`,
+`brainstorming`, `webapp-testing`, `dispatching-parallel-agents`.
+
+## Scaffolding a new service
+
+```bash
+dotnet new install ./templates/sakhaerp-service
+dotnet new sakhaerp-service -n YourService -o services/your-service
+```
+
+See [`templates/sakhaerp-service/README.md`](templates/sakhaerp-service/README.md) for what to do
+next.
+
+---
+
+## GitNexus (optional — only if you've configured it for this clone)
+
+Everything above is the source of truth regardless of whether GitNexus is set up. If you *have*
+run `npx gitnexus analyze` against this repo, the block below (auto-managed by that tool) adds
+call-graph-aware impact analysis and safe renames on top. If you haven't, ignore it — nothing else
+in this repo depends on it.
+
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 

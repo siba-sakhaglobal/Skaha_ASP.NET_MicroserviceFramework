@@ -18,6 +18,17 @@ changes may land in a minor version until 1.0.0.
   same Clean Architecture layout, CQRS pipeline, and multi-tenancy wiring as `inventory-service`.
 - Unit and integration test coverage for `inventory-service`'s `ItemWarehouseMappings` feature
   slice, demonstrating the framework's testing conventions.
+- A curated `.claude/` setup so Claude Code has proper context on a fresh clone: four subagents
+  in `.claude/agents/` pinned to models by task complexity (`sakhaerp-planner` on Opus,
+  `sakhaerp-developer`/`sakhaerp-qa-reviewer` on Sonnet, `sakhaerp-quick-task` on Haiku), a
+  curated skill set in `.claude/skills/` (TDD, systematic debugging, ADRs, verification, etc.),
+  and `docs/development/claude-code-workflow.md` covering token-efficiency and cross-session
+  memory practices.
+- `docs/architecture/tech-stack.md`, `naming-conventions.md`, `resilience.md`, `security.md`,
+  `multi-tenancy.md`, `multi-tenancy-implementation.md`, `dto-conventions.md`, and `performance.md`
+  — the framework-generic slice of the internal knowledge base, ported and genericized so a
+  developer building a different product on SakhaERP doesn't have to read the whole original
+  codebase to understand the framework's own patterns.
 
 ### Changed
 - Renamed the framework and all its packages from `HorizonERP` to `SakhaERP`.
