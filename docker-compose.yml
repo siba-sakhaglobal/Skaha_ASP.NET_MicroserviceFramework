@@ -1,7 +1,7 @@
 services:
   inventory-db:
     image: postgres:16-alpine
-    container_name: horizon-inventory-db
+    container_name: sakha-inventory-db
     environment:
       POSTGRES_DB: inventory_db
       POSTGRES_USER: erp_dev
@@ -18,7 +18,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: horizon-redis
+    container_name: sakha-redis
     ports:
       - "6380:6379"
     healthcheck:

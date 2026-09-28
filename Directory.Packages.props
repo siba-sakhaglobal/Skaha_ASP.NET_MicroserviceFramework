@@ -1,0 +1,62 @@
+<Project>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+
+  <!-- SakhaERP.Shared.* packages — versioned independently of external dependencies below. -->
+  <ItemGroup>
+    <PackageVersion Include="SakhaERP.Shared.Security" Version="1.0.0" />
+  </ItemGroup>
+
+  <!-- Web / API -->
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="9.0.14" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="7.3.2" />
+    <PackageVersion Include="Asp.Versioning.Http" Version="8.1.1" />
+    <PackageVersion Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.10.0" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.20" />
+  </ItemGroup>
+
+  <!-- Data access -->
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.14" />
+    <!-- Pinned explicitly: a transitive dependency of both EF Core and Npgsql's provider,
+         which otherwise resolve to different patch versions and trigger MSB3277. -->
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.14" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.14" />
+    <!-- Kept in lockstep with Microsoft.EntityFrameworkCore above — EF Core provider packages
+         should always match the core package's exact version. -->
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.14" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+  </ItemGroup>
+
+  <!-- CQRS / validation -->
+  <ItemGroup>
+    <PackageVersion Include="MediatR" Version="12.5.0" />
+    <PackageVersion Include="FluentValidation" Version="11.12.0" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.12.0" />
+  </ItemGroup>
+
+  <!-- Logging -->
+  <ItemGroup>
+    <PackageVersion Include="Serilog.AspNetCore" Version="8.0.3" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
+  </ItemGroup>
+
+  <!-- Testing -->
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageVersion Include="xunit" Version="2.9.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <!-- Pinned to the last MIT-licensed release. FluentAssertions 8+ is dual-licensed
+         (commercial for most companies) — do not bump past 7.x without re-checking that. -->
+    <PackageVersion Include="FluentAssertions" Version="7.2.2" />
+    <PackageVersion Include="Moq" Version="4.21.0" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
+    <PackageVersion Include="coverlet.msbuild" Version="6.0.2" />
+  </ItemGroup>
+
+</Project>

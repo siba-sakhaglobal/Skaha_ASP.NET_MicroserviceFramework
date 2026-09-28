@@ -1,6 +1,6 @@
 namespace InventoryService.Infrastructure;
 
-using HorizonERP.Shared.Security.MultiTenancy;
+using SakhaERP.Shared.Security.MultiTenancy;
 using InventoryService.Application.Common.Interfaces;
 using InventoryService.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Http;

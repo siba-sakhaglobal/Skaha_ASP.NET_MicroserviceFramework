@@ -1,0 +1,14 @@
+<Project>
+
+  <!-- Shared build settings for every project in the repo (services + shared libraries). -->
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Authors>Sakha Global</Authors>
+    <Company>Sakha Global</Company>
+    <Copyright>Copyright (c) 2026 Sakha Global</Copyright>
+    <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+
+</Project>

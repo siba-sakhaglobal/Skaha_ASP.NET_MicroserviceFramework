@@ -1,24 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.14" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.*" />
-    <PackageReference Include="Serilog.AspNetCore" Version="8.*" />
-    <PackageReference Include="Asp.Versioning.Http" Version="8.*" />
-    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.*" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Asp.Versioning.Http" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" />
     <!-- Rate Limiting (built-in .NET 9) - no extra package needed -->
     <!-- Polly Resilience for HTTP clients -->
-    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.*" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" />
     <!-- Redis Distributed Cache -->
-    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.*" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
     <!-- EF Core Design tools (for migrations) -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.14">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -29,9 +23,11 @@
     <ProjectReference Include="..\InventoryService.Infrastructure\InventoryService.Infrastructure.csproj" />
   </ItemGroup>
 
-  <!-- TODO: Replace with <PackageReference Include="HorizonERP.Shared.Security" /> when Azure Artifacts is ready -->
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\shared\HorizonERP.Shared.Security\HorizonERP.Shared.Security.csproj" />
+    <!-- Cross-service-boundary dependency: PackageReference only, per repo architecture rule
+         (docs: .claude/rules/architecture.md). Resolved from the local NuGet feed until
+         Azure Artifacts is wired up — see nuget.config. -->
+    <PackageReference Include="SakhaERP.Shared.Security" />
   </ItemGroup>
 
 </Project>

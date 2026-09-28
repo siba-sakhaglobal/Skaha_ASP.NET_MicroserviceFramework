@@ -3,8 +3,8 @@ using InventoryService.Infrastructure;
 using InventoryService.Api.Middleware;
 using InventoryService.Api.RateLimiting;
 using InventoryService.Api.Resilience;
-using HorizonERP.Shared.Security;
-using HorizonERP.Shared.Security.MultiTenancy;
+using SakhaERP.Shared.Security;
+using SakhaERP.Shared.Security.MultiTenancy;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +21,7 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // Multi-tenancy + security (useConfigResolver=true for dev, false for production)
-builder.Services.AddHorizonSecurity(useConfigResolver: builder.Environment.IsDevelopment());
+builder.Services.AddSakhaSecurity(useConfigResolver: builder.Environment.IsDevelopment());
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
